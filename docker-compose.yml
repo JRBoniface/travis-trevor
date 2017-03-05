@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  app:
+    container_name: docker-dev-app
+    build:
+      context: .
+      dockerfile: ".docker/app.dockerfile"
+    image: app:tag
+    networks:
+    - new
+    ports:
+    - "55:55"
+    volumes: 
+    - .:/app
+
+  nginx:
+    container_name: docker-dev-nginx
+    image: "nginx:latest"
+    build:
+      context: .
+      dockerfile: "./.docker/nginx.dockerfile"
+    networks:
+    - network-app
+    ports:
+    -  "90:90"
+    links:
+    - app
+    logging:
+       driver: syslog
+ 
+networks:
+  network-app:
+    driver: bridge
+
+
