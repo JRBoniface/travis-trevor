@@ -8,9 +8,9 @@ services:
       dockerfile: ".docker/app.dockerfile"
     image: app:tag
     networks:
-    - new
+    - network-app
     ports:
-    - "55:55"
+    - "9000:9000"
     volumes: 
     - .:/app
 
@@ -23,7 +23,7 @@ services:
     networks:
     - network-app
     ports:
-    -  "90:90"
+    -  "80:80"
     links:
     - app
     logging:
