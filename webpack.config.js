@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   context: path.resolve(__dirname, 'app'),
@@ -40,7 +41,10 @@ module.exports = {
   }
   ,
   plugins: [
-    new ExtractTextPlugin("styles.css")
+    new ExtractTextPlugin("styles.css"),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,  statsFilename: 'stats.json'
+    })
   ]
 };
 
